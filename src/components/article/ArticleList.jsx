@@ -4,7 +4,7 @@ import Article from './single-article';
 
 const ArticleList = ({ articles }) => {
   const articleData = articles.map(article => (
-    <li key={article.publishedAt}>
+    <li key={article.title}>
       <Article {...article} />
     </li>
   ));
@@ -19,6 +19,7 @@ const ArticleList = ({ articles }) => {
 ArticleList.propTypes = {
   articles: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired
   })).isRequired
 };
