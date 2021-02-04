@@ -5,12 +5,14 @@ import Search from '../components/search/Search';
 
 export default class NewsSearch extends Component {
   state = {
-    articles: []
+    articles: [],
+    loading: true,
   }
 
   componentDidMount() {
     getArticle()
-      .then(articles => this.setState({ articles }));
+      .then(articles => this.setState({ articles }))
+      .then(() => this.setState({ loading: false }));
   }
 
   handleChange = ({ target }) => {
@@ -19,11 +21,13 @@ export default class NewsSearch extends Component {
   }
 
   render() {
-    const { articles } = this.state;
+    const { articles, loading } = this.state;
     return (
       <div>
         <Search onChange={this.handleChange} />
-        <ArticleList articles={articles} />
+        {!loading ? <ArticleList articles={articles} />
+          : <h1>Loading...</h1>
+        }
       </div>
     );
   }
